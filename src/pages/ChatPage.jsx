@@ -15,7 +15,7 @@ export default function ChatPage() {
   const [showMemory, setShowMemory] = useState(false)
   const [error, setError] = useState(null)
   const [reactionTarget, setReactionTarget] = useState(null)
-  const [shareToast, setShareToast] = useState(false)
+  const [shareToast, setShareToast] = useState('')
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
   const greetingAdded = useRef(false)
@@ -100,11 +100,15 @@ export default function ChatPage() {
     }
   }
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const url = `${window.location.origin}/chat/${characterId}`
-    navigator.clipboard.writeText(url).catch(() => {})
-    setShareToast(true)
-    setTimeout(() => setShareToast(false), 2500)
+    try {
+      await navigator.clipboard.writeText(url)
+      setShareToast('Link copied!')
+    } catch {
+      setShareToast('Clipboard blocked')
+    }
+    setTimeout(() => setShareToast(''), 2500)
   }
 
   const handleReaction = (messageId, emoji) => {
@@ -173,7 +177,7 @@ export default function ChatPage() {
       {/* Share toast */}
       {shareToast && (
         <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-ink-600 text-white text-sm px-4 py-2 rounded-full shadow-lg animate-fade-in">
-          🔗 Link copied!
+          🔗 {shareToast}
         </div>
       )}
 
