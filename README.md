@@ -86,21 +86,35 @@ npm run build
 ## Project Structure
 
 ```
-src/
-├── components/
-│   ├── Layout.jsx              # Sidebar + mobile bottom nav
-│   ├── CharacterCard.jsx       # Swipe-friendly character cards
-│   └── Onboarding.jsx          # First-time user flow
-├── pages/
-│   ├── HomePage.jsx
-│   ├── DiscoverPage.jsx
-│   ├── ChatPage.jsx            # Mood, reactions, memory panel, sharing
-│   ├── CreateCharacterPage.jsx
-│   ├── MyCharsPage.jsx
-│   └── SettingsPage.jsx
-└── lib/
-    ├── store.js                # Zustand state + memory system
-    └── api.js                  # Groq API + mood detection
+chai-clone/
+├── src/
+│   ├── components/
+│   │   ├── Layout.jsx              # Sidebar + mobile bottom nav
+│   │   ├── CharacterCard.jsx       # Swipe-friendly character cards
+│   │   └── Onboarding.jsx          # First-time user flow
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── DiscoverPage.jsx
+│   │   ├── ChatPage.jsx            # Mood, reactions, memory panel, sharing
+│   │   ├── CreateCharacterPage.jsx
+│   │   ├── MyCharsPage.jsx
+│   │   └── SettingsPage.jsx
+│   ├── lib/
+│   │   ├── store.js                # Zustand state + memory system
+│   │   └── api.js                  # Groq API + mood detection
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── public/
+│   └── screenshots/               # UI preview images
+├── ai-logs/
+│   └── build-conversation.md      # AI-assisted development process
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
 ## Notes
