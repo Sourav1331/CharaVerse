@@ -9,16 +9,20 @@ function formatCount(n) {
 
 export default function CharacterCard({ character, size = 'default' }) {
   const navigate = useNavigate()
-  const [shared, setShared] = useState(false)
+  const [shareStatus, setShareStatus] = useState('idle')
   // Touch swipe tracking
   const touchStart = useRef(null)
 
-  const handleShare = (e) => {
+  const handleShare = async (e) => {
     e.stopPropagation()
     const url = `${window.location.origin}/chat/${character.id}`
-    navigator.clipboard.writeText(url).catch(() => {})
-    setShared(true)
-    setTimeout(() => setShared(false), 1500)
+    try {
+      await navigator.clipboard.writeText(url)
+      setShareStatus('success')
+    } catch {
+      setShareStatus('error')
+    }
+    setTimeout(() => setShareStatus('idle'), 1600)
   }
 
   const handleTouchStart = (e) => {
@@ -57,7 +61,7 @@ export default function CharacterCard({ character, size = 'default' }) {
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="group rounded-2xl glass glass-hover overflow-hidden text-left w-full active:scale-[0.98] transition-transform"
+      className="group rounded-2xl glass glass-hover overflow-hidden text-left w-full active:scale-[0.98] transition-transform duration-200"
     >
       {/* Avatar area */}
       <button
@@ -93,7 +97,13 @@ export default function CharacterCard({ character, size = 'default' }) {
             className="p-1 text-muted hover:text-bright transition-colors flex-shrink-0"
             title="Share character"
           >
-            {shared ? <span className="text-xs text-bright">✓</span> : <Share2 size={14} />}
+            {shareStatus === 'success' ? (
+              <span className="text-xs text-bright">✓</span>
+            ) : shareStatus === 'error' ? (
+              <span className="text-[10px] text-red-300">!</span>
+            ) : (
+              <Share2 size={14} />
+            )}
           </button>
         </div>
 

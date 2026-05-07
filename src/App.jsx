@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Onboarding from './components/Onboarding'
@@ -12,6 +12,11 @@ import useStore from './lib/store'
 
 export default function App() {
   const onboardingComplete = useStore(s => s.onboardingComplete)
+  const theme = useStore(s => s.theme)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
 
   return (
     <>

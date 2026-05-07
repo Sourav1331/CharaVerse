@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { 
   Home, Compass, Plus, User, Settings, MessageSquare, 
-  Menu, X, Sparkles, ChevronRight
+  Menu, X, Sparkles, ChevronRight, Sun, Moon
 } from 'lucide-react'
 import useStore from '../lib/store'
 
@@ -18,6 +18,8 @@ export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const conversations = useStore(s => s.conversations)
   const getAllCharacters = useStore(s => s.getAllCharacters)
+  const theme = useStore(s => s.theme)
+  const toggleTheme = useStore(s => s.toggleTheme)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -53,6 +55,13 @@ export default function Layout() {
             <Sparkles size={16} className="text-white" />
           </div>
           <span className="font-display font-bold text-lg glow-text">CharaVerse</span>
+          <button
+            onClick={toggleTheme}
+            className="p-1.5 rounded-lg text-muted hover:text-white hover:bg-card transition-all"
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
           <button 
             onClick={() => setMobileOpen(false)}
             className="ml-auto lg:hidden text-muted hover:text-white"
@@ -121,6 +130,13 @@ export default function Layout() {
               <Menu size={22} />
             </button>
             <span className="font-display font-bold glow-text">CharaVerse</span>
+            <button
+              onClick={toggleTheme}
+              className="ml-auto p-1.5 rounded-lg text-muted hover:text-white hover:bg-card transition-all"
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </header>
         )}
 

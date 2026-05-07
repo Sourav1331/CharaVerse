@@ -265,6 +265,12 @@ const useStore = create(
       user: { name: 'You', avatar: '👤' },
       setUser: (userData) => set(state => ({ user: { ...state.user, ...userData } })),
 
+      // Theme
+      theme: 'dark',
+      setTheme: (theme) => set({ theme: theme === 'light' ? 'light' : 'dark' }),
+      toggleTheme: () =>
+        set(state => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+
       // Onboarding
       onboardingComplete: false,
       setOnboardingComplete: () => set({ onboardingComplete: true }),
@@ -281,6 +287,7 @@ const useStore = create(
         moods: state.moods,
         user: state.user,
         onboardingComplete: state.onboardingComplete,
+        theme: state.theme,
       }),
     }
   )
