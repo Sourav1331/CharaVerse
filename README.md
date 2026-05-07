@@ -17,7 +17,21 @@
 - ❤️ **Message reactions** — double-tap or hover any message to react
 - 🔗 **Character sharing** — share any character via URL
 - ✨ **Character creator** — build custom characters with personality, backstory, and greeting
-- 📱 **Mobile-native UI** — bottom tab navigation, swipe-friendly cards, full-screen chat
+- 📱 **Mobile-first UI** — bottom tab navigation, swipe-friendly cards, full-screen chat
+
+## Screenshots
+
+| Home | Discover |
+|------|----------|
+| ![Home](public/screenshots/home.png) | ![Discover](public/screenshots/discover.png) |
+
+| Chat | Create Character |
+|------|------------------|
+| ![Chat](public/screenshots/chat.png) | ![Create](public/screenshots/create.png) |
+
+## Conversation Quality & Character Consistency
+
+CharaVerse uses a layered prompt system: **character profile → consistency guard → emoji expression rules → memory context**. This keeps voice, tone, and worldview stable across long chats, while memory summaries (every 10 messages) are injected as facts. The app is a **mobile-first responsive web app** (not a native mobile client).
 
 ## Quick Start
 
@@ -55,7 +69,7 @@ npm run build
 
 - React 18 + Vite
 - Tailwind CSS + Zustand
-- Groq API (Llama 3 70B)
+- Groq API (Llama 3.1 70B for chat)
 - React Router v6
 
 ## Built-in Characters
@@ -94,6 +108,10 @@ src/
 - Conversations and memories are persisted in `localStorage` per device
 - Memory summaries are generated via Groq every 10 messages and injected into the system prompt
 - For production, proxy Groq API calls through a backend to keep the key server-side
+ 
+## AI Logs / Development Process
+
+The AI-assisted build process and prompt design notes are captured in `ai-logs/build-conversation.md` for transparency.
 
 ## License
 

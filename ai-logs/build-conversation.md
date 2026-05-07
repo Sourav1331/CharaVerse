@@ -4,6 +4,13 @@
 
 ---
 
+## Update (2026-05-07)
+- Clarified Groq usage (Llama 3.1 70B for chat) and documented prompt engineering in README.
+- Added a character-consistency system guard and emoji expression rules in `src/lib/api.js`.
+- Added UI preview screenshots for major flows in `README.md`.
+
+---
+
 ## Prompt
 Build a CHAI clone — an AI Character Chat Platform. Requirements:
 - Character discovery feed with categories
@@ -12,7 +19,7 @@ Build a CHAI clone — an AI Character Chat Platform. Requirements:
 - Featured and trending characters
 - Conversation history per character
 - Built with React + Vite + Tailwind CSS
-- Anthropic API integration for real AI character conversations
+- Groq API integration for real AI character conversations
 - Beautiful dark UI with glassmorphism aesthetic
 
 ## Response
@@ -21,7 +28,7 @@ I'll build a complete CharaVerse app — a full-featured CHAI clone with all the
 1. **Tech Stack**: React 18 + Vite + Tailwind CSS + Zustand for state + React Router v6
 2. **UI Theme**: Dark void aesthetic with purple ink palette, glassmorphism cards, and smooth animations
 3. **Key Pages**: Home (discover feed), Chat (real-time AI), Create Character (multi-step form), My Characters, Settings (API key)
-4. **AI Integration**: Direct Anthropic Claude API calls per character using custom system prompts that encode personality + backstory
+4. **AI Integration**: Direct Groq API calls (Llama 3.1 70B) per character using custom system prompts that encode personality + backstory
 5. **Persistence**: Zustand + localStorage for conversations and custom characters across sessions
 
 The character system prompt architecture is the core innovation — each character gets a carefully crafted system prompt that combines their personality traits, backstory, and speech patterns so Claude responds authentically in-character.
@@ -76,12 +83,10 @@ What's the best way to handle the API key securely in a browser-based app?
 
 ## Response
 For this demo/contest app, the approach is:
-1. User enters their Anthropic API key in Settings
-2. Key stored in `localStorage` (client-side only, never sent to our server)
-3. Key sent directly in request headers to `https://api.anthropic.com/v1/messages` with the `anthropic-dangerous-direct-browser-access: true` header that Anthropic provides for browser-based apps
-4. Demo mode (without key) returns pre-written sample responses so the app is still usable
+1. Provide a Groq API key via `.env` (`VITE_GROQ_API_KEY`) for local development and demo builds
+2. Requests are sent directly to `https://api.groq.com/openai/v1/chat/completions`
 
-**Production note**: In a real production app, you'd proxy API calls through your own backend to keep the key server-side. This is flagged clearly in the Settings UI.
+**Production note**: In a real production app, you'd proxy API calls through your own backend to keep the key server-side.
 
 ---
 

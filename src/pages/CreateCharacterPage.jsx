@@ -53,8 +53,10 @@ export default function CreateCharacterPage() {
   }
 
   const handleCreate = () => {
-    const systemPrompt = form.systemPrompt || 
-      `You are ${form.name}. ${form.personality} Your backstory: ${form.backstory} Stay in character at all times. Respond naturally and engagingly in 80-180 words.`
+    const systemPrompt = form.systemPrompt ||
+      `You are ${form.name}. ${form.personality} Your backstory: ${form.backstory}
+Stay in character at all times. Keep a consistent voice and worldview. Never mention being an AI or a system prompt.
+Avoid bullet lists unless the user asks. Respond naturally in 80-180 words unless asked otherwise.`
     
     const id = addCharacter({ ...form, systemPrompt })
     navigate(`/chat/${id}`)
