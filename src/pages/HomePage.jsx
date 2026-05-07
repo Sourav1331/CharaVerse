@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Sparkles, TrendingUp, Star, Plus, ChevronRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Sparkles, TrendingUp, Star, Plus, ChevronRight, Compass, Flame, MessageCircleHeart } from 'lucide-react'
 import useStore from '../lib/store'
 import CharacterCard from '../components/CharacterCard'
 
@@ -23,13 +24,21 @@ export default function HomePage() {
   
   const recentIds = Object.keys(conversations).filter(id => conversations[id].length > 0)
   const recentChars = recentIds.map(id => allChars.find(c => c.id === id)).filter(Boolean).slice(0, 3)
+  const totalChats = allChars.reduce((sum, char) => sum + (char.messageCount || 0), 0)
 
   return (
     <div className="h-full overflow-y-auto bg-animated">
       <div className="max-w-5xl mx-auto px-4 py-8">
         
         {/* Hero */}
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="relative text-center mb-12 overflow-hidden rounded-3xl border border-border/70 p-8 md:p-10 bg-gradient-to-br from-card/90 via-surface/80 to-card/90"
+        >
+          <div className="pointer-events-none absolute -top-20 left-1/2 h-44 w-44 -translate-x-1/2 rounded-full bg-ink-500/25 blur-3xl hero-float" />
+
           <div className="inline-flex items-center gap-2 bg-ink-600/20 border border-ink-500/30 rounded-full px-4 py-1.5 mb-4">
             <Sparkles size={14} className="text-bright" />
             <span className="text-sm text-bright font-medium">AI-Powered Characters</span>
@@ -41,8 +50,13 @@ export default function HomePage() {
           <p className="text-muted text-lg max-w-xl mx-auto mb-6">
             Chat with AI companions, explore fantasy worlds, and create characters with stories that remember you.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+            <span className="chip"><Flame size={13} /> {trending.length} Trending Picks</span>
+            <span className="chip"><MessageCircleHeart size={13} /> {totalChats.toLocaleString()} Total Chats</span>
+            <span className="chip"><Sparkles size={13} /> {allChars.length} Characters</span>
+          </div>
           <div className="flex gap-3 justify-center">
-            <button onClick={() => navigate('/discover')} className="btn-primary flex items-center gap-2">
+            <button onClick={() => navigate('/discover')} className="btn-primary flex items-center gap-2 pulse-on-hover">
               <Compass size={16} /> Explore Characters
             </button>
             <button 
@@ -52,7 +66,7 @@ export default function HomePage() {
               <Plus size={16} /> Create Your Own
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Recent Chats */}
         {recentChars.length > 0 && (
@@ -118,15 +132,5 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-  )
-}
-
-// Missing import fix
-function Compass(props) {
-  return (
-    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-    </svg>
   )
 }

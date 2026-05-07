@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Save, CheckCircle, User, Info } from 'lucide-react'
+import { Save, CheckCircle, User, Info, Sun, Moon } from 'lucide-react'
 import useStore from '../lib/store'
 
 export default function SettingsPage() {
@@ -7,6 +7,8 @@ export default function SettingsPage() {
   const user = useStore(s => s.user)
   const setUser = useStore(s => s.setUser)
   const conversations = useStore(s => s.conversations)
+  const theme = useStore(s => s.theme)
+  const setTheme = useStore(s => s.setTheme)
   const [userName, setUserName] = useState(user.name)
 
   const saveUser = () => {
@@ -68,6 +70,39 @@ export default function SettingsPage() {
               <p className="text-3xl font-display font-bold text-bright">{totalMessages}</p>
               <p className="text-muted text-sm mt-1">Total messages</p>
             </div>
+          </div>
+        </div>
+
+        {/* Theme */}
+        <div className="glass rounded-2xl p-6 mb-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-ink-700/50 flex items-center justify-center">
+              {theme === 'dark' ? <Moon size={18} className="text-bright" /> : <Sun size={18} className="text-bright" />}
+            </div>
+            <div>
+              <h2 className="font-display font-bold text-white text-lg">Appearance</h2>
+              <p className="text-muted text-sm">Choose your preferred theme</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => setTheme('dark')}
+              className={`rounded-xl border p-3 text-left transition-all ${
+                theme === 'dark' ? 'border-ink-500 bg-ink-700/30' : 'border-border bg-void hover:border-ink-500/40'
+              }`}
+            >
+              <p className="text-sm font-semibold text-white mb-0.5">Dark</p>
+              <p className="text-xs text-muted">Night-friendly contrast</p>
+            </button>
+            <button
+              onClick={() => setTheme('light')}
+              className={`rounded-xl border p-3 text-left transition-all ${
+                theme === 'light' ? 'border-ink-500 bg-ink-700/20' : 'border-border bg-void hover:border-ink-500/40'
+              }`}
+            >
+              <p className="text-sm font-semibold text-white mb-0.5">Light</p>
+              <p className="text-xs text-muted">Clean daylight look</p>
+            </button>
           </div>
         </div>
 
