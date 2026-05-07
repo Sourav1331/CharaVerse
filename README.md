@@ -7,6 +7,8 @@
 ![Groq](https://img.shields.io/badge/Powered%20by-Groq%20API-orange)
 ![Llama](https://img.shields.io/badge/Model-Llama%203%2070B-green)
 
+🚀 **[Live Demo](https://chara-verse.vercel.app/)**
+
 ## Features
 
 - 🎭 Browse and chat with pre-built characters (Fantasy, Sci-Fi, Romance, Mystery)
