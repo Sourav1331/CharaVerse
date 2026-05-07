@@ -18,6 +18,7 @@ html[data-theme='light'] {
   --border-color: #d8ddff;
   --text-main: #16122f;
   --text-muted: #5f608f;
+  --text-accent: #4b35b7;
 }
 
 @layer base {
@@ -221,11 +222,40 @@ html[data-theme='light'] .glass {
   background: rgba(255, 255, 255, 0.82) !important;
   border-color: rgba(189, 197, 255, 0.8) !important;
 }
+html[data-theme='light'] .glass-hover:hover {
+  background: #f8f9ff !important;
+  border-color: rgba(118, 96, 229, 0.35) !important;
+  box-shadow: 0 10px 26px rgba(105, 92, 199, 0.15);
+}
 html[data-theme='light'] .border-border { border-color: var(--border-color) !important; }
 html[data-theme='light'] .text-white,
-html[data-theme='light'] .text-gray-100 { color: var(--text-main) !important; }
+html[data-theme='light'] .text-gray-100,
+html[data-theme='light'] .text-gray-400 { color: var(--text-main) !important; }
 html[data-theme='light'] .text-muted,
 html[data-theme='light'] .text-gray-300 { color: var(--text-muted) !important; }
+html[data-theme='light'] [class*='text-bright'] { color: var(--text-accent) !important; }
+html[data-theme='light'] input,
+html[data-theme='light'] textarea {
+  color: var(--text-main) !important;
+}
+html[data-theme='light'] input::placeholder,
+html[data-theme='light'] textarea::placeholder {
+  color: #7c7ea9 !important;
+}
+html[data-theme='light'] .bg-ink-800\/50,
+html[data-theme='light'] .bg-ink-700\/50,
+html[data-theme='light'] .bg-ink-700\/30,
+html[data-theme='light'] .bg-ink-700\/20,
+html[data-theme='light'] .bg-ink-600\/40,
+html[data-theme='light'] .bg-ink-600\/30,
+html[data-theme='light'] .bg-ink-600\/20 {
+  background-color: rgba(121, 103, 226, 0.14) !important;
+}
+html[data-theme='light'] .border-ink-500\/30,
+html[data-theme='light'] .border-ink-500\/40,
+html[data-theme='light'] .border-ink-500\/50 {
+  border-color: rgba(101, 86, 205, 0.32) !important;
+}
 html[data-theme='light'] .msg-ai {
   background: #ffffff !important;
   border-color: var(--border-color) !important;
@@ -234,7 +264,7 @@ html[data-theme='light'] .msg-user {
   color: #ffffff !important;
 }
 html[data-theme='light'] .chip {
-  color: #4b3f82;
-  background: rgba(129, 140, 248, 0.14);
-  border-color: rgba(99, 102, 241, 0.24);
+  color: #45388a;
+  background: rgba(104, 98, 215, 0.12);
+  border-color: rgba(99, 102, 241, 0.28);
 }
