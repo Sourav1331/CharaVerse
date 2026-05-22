@@ -8,12 +8,19 @@ export default function MyCharsPage() {
   const customCharacters = useStore(s => s.customCharacters)
   const conversations = useStore(s => s.conversations)
   const clearConversation = useStore(s => s.clearConversation)
+  const deleteCharacter = useStore(s => s.deleteCharacter) // ✅ pull deleteCharacter
 
   const allChars = useStore(s => s.getAllCharacters)()
   const activeConvos = Object.keys(conversations)
     .filter(id => conversations[id].length > 0)
     .map(id => ({ char: allChars.find(c => c.id === id), count: conversations[id].length }))
     .filter(x => x.char)
+
+  const handleDelete = (char) => {
+    if (confirm(`Delete "${char.name}"? This will also clear their conversation and memories.`)) {
+      deleteCharacter(char.id)
+    }
+  }
 
   return (
     <div className="h-full overflow-y-auto bg-animated">
@@ -60,6 +67,13 @@ export default function MyCharsPage() {
                     className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ink-700/50 hover:bg-ink-600/70 text-white text-sm transition-all"
                   >
                     <MessageSquare size={14} /> Chat
+                  </button>
+                  {/* ✅ Delete button now actually works */}
+                  <button
+                    onClick={() => handleDelete(char)}
+                    className="p-2 text-muted hover:text-red-400 rounded-xl hover:bg-card transition-all"
+                  >
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>

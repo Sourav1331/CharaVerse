@@ -119,6 +119,21 @@ const useStore = create(
         return newChar.id
       },
 
+      // ✅ NEW: delete a custom character and clean up its data
+      deleteCharacter: (characterId) => {
+        set(state => {
+          const { [characterId]: _conv, ...restConvs } = state.conversations
+          const { [characterId]: _mem, ...restMems } = state.memories
+          const { [characterId]: _mood, ...restMoods } = state.moods
+          return {
+            customCharacters: state.customCharacters.filter(c => c.id !== characterId),
+            conversations: restConvs,
+            memories: restMems,
+            moods: restMoods,
+          }
+        })
+      },
+
       getAllCharacters: () => {
         const state = get()
         return [...state.characters, ...state.customCharacters]
